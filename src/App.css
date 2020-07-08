@@ -1,41 +1,31 @@
-html{
-  box-sizing: border-box;
+html {
+    box-sizing: border-box;
 }
+
 *,
 *::before,
-*::after{
-  box-sizing: inherit;
+*::after {
+    box-sizing: inherit;
 }
+
 ul,
-li{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
-.container{
-  max-width: 1200px;
-  padding: 0 15px;
-  margin: 0 auto;
+
+.container {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
 }
-a{
-  text-decoration: none;
-  color: #000;
+
+a {
+    text-decoration: none;
+    color: #000;
 }
-.header{
-  background-color: #F8F9F9;
-}
-.header img{
-  max-width: 90px;
-}
-.aside{
-  max-width: 200px;
-  width: 100%;
-  padding: 15px 0 0 10px;
-}
-.box__inner{
-  display: flex;
-}
-.main-img{
-  display: block;
-  width: 100%;
+
+.box__inner {
+    display: flex;
 }
