@@ -15,9 +15,8 @@ const Profile = () => {
                 </div>
             </div>
             <div className='posts'>
-                <Post/>
-                <Post/>
-                <Post/>
+                <Post message={`Hi, how are you`} likeCount={`5`}/>
+                <Post message={`it's my first post`} likeCount={`5`}/>
             </div>
         </div>
     )
