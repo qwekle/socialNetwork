@@ -4,25 +4,35 @@ import Header from './componets/Header/Header';
 import Profile from "./componets/Profile/Profile";
 import Navbar from "./componets/Navbar/Navbar";
 import Dialogs from "./componets/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import { Route } from "react-router-dom"
 
 
-const App = () => {
+const App = (props) => {
+
+
     return (
-        <BrowserRouter>
-            <div className="App">
-                <Header/>
-                <div className='container'>
-                    <div className='box'>
-                        <Navbar/>
-                        <div className='box__inner'>
-                            <Route path='/profile' render={() => <Profile/>}/>
-                            <Route path='/dialogs' render={() => <Dialogs/>}/>
-                        </div>
+
+        <div className="App">
+            <Header/>
+            <div className='container'>
+                <div className='box'>
+                    <Navbar/>
+                    <div className='box__inner'>
+                        <Route path='/dialogs'
+                               render={() =>
+                                   <Dialogs state={props.state.dialogsPage}/>
+                               }/>
+                        <Route path='/profile'
+                               render={() =>
+                                   <Profile profilePage={props.state.profilePage}
+                                            addPost={props.addPost}
+                                            updateNewPostText={props.updateNewPostText}/>
+                               }/>
                     </div>
                 </div>
             </div>
-        </BrowserRouter>
+        </div>
+
     );
 }
 
