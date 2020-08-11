@@ -5,8 +5,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
 
-
-    let postsElements = props.profilePage .postsData.map( p => {
+    let postsElements = props.profilePage.postsData.map( p => {
         return <Post message={p.message} likeCount={p.likeCount} />
     })
     let newPostElement = React.createRef();
