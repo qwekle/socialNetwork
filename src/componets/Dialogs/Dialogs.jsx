@@ -2,23 +2,33 @@ import React from "react";
 import s from './Dialogs.module.css';
 import DialogsMessage from "./DialogsItem/DialogsMessage";
 import Message from "./Message/Message";
+import {updateNewMessageBodyCreator, sendMessageCreator} from '../../redux/dialogs-reducer'
 
 
 
 
 const Dialogs = (props) => {
 
+    let state = props.store.getState().dialogsPage;
 
 
-
-    let dialogsElements = props.state.dialogsData.map(d => {
-        return <DialogsMessage name={d.name} id={d.id}/>
+    let dialogsElements = state.dialogsData.map(d => {
+        return <DialogsMessage name={d.name} id={d.id} />
     });
-    let messagesElements = props.state.messagesData.map(m => {
-        return <Message message={m.message}/>
+    let messagesElements = state.messagesData.map(m => {
+        return <Message message={m.message} />
     });
 
+    let newMessageBody = state.newMessageBody;
 
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator());
+    }
+
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.store.dispatch(updateNewMessageBodyCreator(body));
+    }
 
 
     return (
@@ -29,7 +39,14 @@ const Dialogs = (props) => {
                     {dialogsElements}
                 </div>
                 <div className={s.messages}>
-                    {messagesElements}
+                    <div>{messagesElements}</div>
+                    <div>
+                        <div><textarea 
+                        onChange={onNewMessageChange}
+                        value={newMessageBody} 
+                        placeholder='Напишите сообщение'></textarea></div>
+                        <div><button onClick={onSendMessageClick}>Отправить</button></div>
+                    </div>
                 </div>
             </div>
         </div>
