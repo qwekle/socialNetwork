@@ -1,8 +1,0 @@
-.navbar{
-    max-width: 200px;
-    width: 100%;
-    padding: 15px 0 0 10px;
-}
-.navbar li a.active{
-    color: gray;
-}
