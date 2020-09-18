@@ -8,42 +8,52 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "./redux/auth-reducer";
 import {compose} from "redux";
-
-
+import {initializeApp} from "./redux/app-reducer";
+import Preloader from "./components/common/preloader/Preloader";
 
 
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.getAuthUserData();
+        this.props.initializeApp();
+        console.log(this.props)
     }
-
     render() {
-        return (
-            <div className='app-wrapper'>
-                <HeaderContainer/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/dialogs'
-                           render={() => <DialogsContainer store={this.props.store}/>}/>
 
-                    <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer store={this.props.store}/>}/>
+        if (!this.props.initialized) {
+            return <Preloader/>
+        } else {
+            return (
+                <div className='app-wrapper'>
+                    <HeaderContainer/>
+                    <Navbar/>
+                    <div className='app-wrapper-content'>
+                        <Route path='/dialogs'
+                               render={() => <DialogsContainer store={this.props.store}/>}/>
 
-                    <Route path='/users'
-                           render={() => <UsersContainer/>}/>
-                    <Route path='/login'
-                           render={() => <Login/>}/>
+                        <Route path='/profile/:userId?'
+                               render={() => <ProfileContainer store={this.props.store}/>}/>
+
+                        <Route path='/users'
+                               render={() => <UsersContainer/>}/>
+                        <Route path='/login'
+                               render={() => <Login/>}/>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+
+
     }
 }
 
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+})
+
 export default compose(
     withRouter,
-    connect(null, {getAuthUserData, logout}))(App);
+    connect(mapStateToProps, {initializeApp}))(App);
 
 

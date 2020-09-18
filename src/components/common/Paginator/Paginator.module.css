@@ -1,0 +1,7 @@
+.selectedPage{
+    color: red;
+}
+.pagination span{
+    cursor: pointer;
+    margin-right: 10px;
+}

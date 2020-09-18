@@ -8,13 +8,13 @@ import {Redirect} from "react-router-dom";
 import s from './../common/FormsControls/FormsControls.module.css'
 
 const maxLength30 = maxLengthCreator(30)
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-            <form onSubmit={props.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div><Field component={Input} validate={[required, maxLength30]} name={'email'} placeholder={'email'}/></div>
                 <div><Field component={Input} validate={[required, maxLength30]} name={'password'} type={'password'} placeholder={'password'}/></div>
                 <div><Field component={Input} name={'rememberMe'} type={'checkbox'}/> remember me</div>
-                {props.error && <div className={s.formSummaryError}>{props.error}</div>}
+                {error && <div className={s.formSummaryError}>{error}</div>}
                 <div><button>Login</button></div>
             </form>
     )
