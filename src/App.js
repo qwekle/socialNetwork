@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import {Route, withRouter} from "react-router-dom";
@@ -13,36 +13,36 @@ import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/preloader/Preloader";
 
 
-class App extends React.Component {
+class App extends Component {
 
     componentDidMount() {
         this.props.initializeApp();
-        console.log(this.props)
     }
+
     render() {
 
         if (!this.props.initialized) {
             return <Preloader/>
-        } else {
-            return (
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
-                        <Route path='/dialogs'
-                               render={() => <DialogsContainer store={this.props.store}/>}/>
-
-                        <Route path='/profile/:userId?'
-                               render={() => <ProfileContainer store={this.props.store}/>}/>
-
-                        <Route path='/users'
-                               render={() => <UsersContainer/>}/>
-                        <Route path='/login'
-                               render={() => <Login/>}/>
-                    </div>
-                </div>
-            )
         }
+
+        return (
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Route path='/dialogs'
+                           render={() => <DialogsContainer />}/>
+
+                    <Route path='/profile/:userId?'
+                           render={() => <ProfileContainer />}/>
+
+                    <Route path='/users'
+                           render={() => <UsersContainer/>}/>
+                    <Route path='/login'
+                           render={() => <Login/>}/>
+                </div>
+            </div>
+        )
 
 
     }

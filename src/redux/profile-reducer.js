@@ -1,4 +1,4 @@
-import {profileAPI, UsersAPI} from "../api/api";
+import {profileAPI,  usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -31,6 +31,7 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SET_USER_PROFILE: {
+            debugger;
             return {
                 ...state,
                 profile: action.profile,
@@ -58,8 +59,10 @@ export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostTe
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
 export const deletePost = (postId) => ({type: DELETE_POST, postId})
+
 export const getUserProfile = (userId) => async (dispatch) => {
-    let response = await UsersAPI.getProfile(userId)
+    debugger;
+    let response = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(response.data));
 }
 export const getStatus = (userId) => async (dispatch) => {
@@ -69,6 +72,7 @@ export const getStatus = (userId) => async (dispatch) => {
 
 export const updateStatus = (status) => async (dispatch) => {
     let response = await profileAPI.updateStatus(status)
+
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }

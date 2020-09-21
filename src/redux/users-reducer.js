@@ -1,4 +1,4 @@
-import {UsersAPI as usersAPI, UsersAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/object-helpers";
 
 const FOLLOW = 'FOLLOW';
@@ -77,7 +77,7 @@ export const requestUsers = (page, pageSize) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true));
 
-        let data = await UsersAPI.getUsers(page, pageSize)
+        let data = await usersAPI.getUsers(page, pageSize)
 
         dispatch(toggleIsFetching(false));
         dispatch(setCurrentPage(page));
