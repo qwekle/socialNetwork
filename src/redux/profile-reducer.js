@@ -31,7 +31,6 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SET_USER_PROFILE: {
-            debugger;
             return {
                 ...state,
                 profile: action.profile,
@@ -61,7 +60,7 @@ export const setStatus = (status) => ({type: SET_STATUS, status})
 export const deletePost = (postId) => ({type: DELETE_POST, postId})
 
 export const getUserProfile = (userId) => async (dispatch) => {
-    debugger;
+    //debugger;
     let response = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(response.data));
 }

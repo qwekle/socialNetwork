@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import Preloader from '../../common/preloader/Preloader';
+import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = ({profile, status, updateStatus}) => {
-    if (profile) {
+    if (!profile) {
         return <Preloader/>
     }
     return (
