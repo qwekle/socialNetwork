@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import s from './Paginator.module.css';
-
+import cn from 'classnames'; // Для более удобного написания нескольких классов у одного элемента(Через запятую как параметры функции)
 let Paginator = ({totalItemsCount, pageSize, onPageChanged, currentPage, portionSize = 10}) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);

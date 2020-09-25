@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import {HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, withRouter} from "react-router-dom"; //HashRouter
 import UsersContainer from './components/Users/UsersContainer';
 
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -18,9 +18,18 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import ('./components/Profile/ProfileContainer'));
 
 class App extends Component {
+    catchAllUnhandeledErrors = (resone, pormise) => {
+        alert('some error');
+    // Сюда ошибкак не попадёт так как она уже обработанна через try catch
+    }
 
     componentDidMount() {
         this.props.initializeApp();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandeledErrors)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandeledErrors)
+
     }
 
     render() {
@@ -34,6 +43,8 @@ class App extends Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
+                    <Route path='/'
+                           render={() => <Redirect to={'/profile'}/>}/>
                     <Route path='/dialogs'
                            render={withSuspense(DialogsContainer)}/>
 
@@ -44,6 +55,8 @@ class App extends Component {
                            render={withSuspense(UsersContainer)}/>
                     <Route path='/login'
                            render={() => <Login/>}/>
+                    <Route path='*'
+                           render={() => <div>404 Not Found</div>}/>
                 </div>
             </div>
         )
@@ -61,11 +74,11 @@ let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App);
 
 const SamuraiJSApp = (props) => {
-    return <HashRouter basename={process.env.PUBLLIC_URL}>
+    return <BrowserRouter basename={process.env.PUBLLIC_URL}>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
 }
 export default SamuraiJSApp;
 
